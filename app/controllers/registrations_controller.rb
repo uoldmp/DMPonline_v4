@@ -21,6 +21,14 @@ class RegistrationsController < Devise::RegistrationsController
   			end
   		else
 			build_resource(sign_up_params)
+
+			if shibboleth_data.present? && resource.password.empty?
+			  # Set random password for new shibboleth users, as they'll be authenticating
+			  # with external credentials. Will require a password reset to use the account
+			  # without shibboleth.
+			  resource.password_confirmation = resource.password = Digest::SHA256.hexdigest(rand.to_s)
+			end
+
 			if resource.save
 			  if resource.active_for_authentication?
 				set_flash_message :notice, :signed_up if is_navigational_format?
