@@ -1,10 +1,12 @@
 statusbar: false
 menubar: false
-toolbar: bold italic | bullist numlist | link | table
+toolbar: bold italic | bullist numlist | link | table | paste
 plugins:
   - table
   - autoresize
   - link
+  - paste
 target_list: false 
 autoresize_min_height: 130
 extended_valid_elements : "iframe[tooltip] , a[href|target=_blank]"
+paste_word_valid_elements: 'b,strong,i,em,a,ul,ol,li'
