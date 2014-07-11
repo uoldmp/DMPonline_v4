@@ -1,6 +1,10 @@
 # app/controllers/registrations_controller.rb
 class RegistrationsController < Devise::RegistrationsController
 
+  def new
+    build_resource(shibboleth_data)
+    respond_with self.resource
+  end
 
   # POST /resource
   def create
@@ -85,4 +89,17 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-end 
+  def shibboleth_data
+    sd = session[:shibboleth_data]
+    raw_info = sd && sd[:extra] && sd[:extra][:raw_info]
+
+    return {} unless raw_info.is_a?(Hash)
+
+    @shibboleth_data ||= {
+      email: raw_info[:mail],
+      firstname: raw_info[:givenName],
+      surname: raw_info[:sn]
+    }
+  end
+
+end

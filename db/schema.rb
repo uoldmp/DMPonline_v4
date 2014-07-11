@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140707143840) do
+ActiveRecord::Schema.define(:version => 20140711082540) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -178,10 +178,10 @@ ActiveRecord::Schema.define(:version => 20140707143840) do
     t.integer  "banner_file_id"
     t.integer  "organisation_type_id"
     t.string   "domain"
-    t.integer  "wayfless_entity"
+    t.string   "wayfless_entity",      :default => "null"
     t.integer  "stylesheet_file_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "parent_id"
     t.boolean  "is_other"
     t.string   "sort_name"
